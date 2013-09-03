@@ -3,6 +3,8 @@ WP Login Protector
 
 Simple tools to protect your wordpress login from brute force attacks.
 
+http://cl.ly/image/0P0T072a1z2x
+
 ## POST Cookie Protection
 This will set a cookie when an initial, GET request is made on the site (which happens when a human logs in).
 
