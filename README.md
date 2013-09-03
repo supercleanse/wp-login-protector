@@ -5,6 +5,14 @@ Simple tools to protect your wordpress login from brute force attacks.
 
 http://cl.ly/image/0P0T072a1z2x
 
+__Have you ever been the recipient of a brute force attack?__
+
+If you have, you know it's not very fun ... even if no passwords are retrieved by the attacker.
+
+If you're wondering what a brute force attack looks like, here's an example:
+
+http://cl.ly/image/200V0C0E1R1I
+
 ## POST Cookie Protection
 This will set a cookie when an initial, GET request is made on the site (which happens when a human logs in).
 
