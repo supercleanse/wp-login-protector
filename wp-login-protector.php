@@ -32,9 +32,9 @@ wlp_hooks();
 function wlp_hooks() {
   add_action('admin_menu', 'wlp_menu');
 
-  if( false==($basic_auth = get_option('wlp_basic_auth')) )     { $basic_auth = 'off'; }
-  if( false==($filter_http = get_option('wlp_filter_http')) )   { $filter_http = 'on'; }
-  if( false==($protect_post = get_option('wlp_protect_post')) ) { $protect_post = 'on'; }
+  if( false==($basic_auth = get_option('wlp_basic_auth')) )     { $basic_auth = (defined('WLP_BASIC_AUTH')?WLP_BASIC_AUTH:'off'); }
+  if( false==($filter_http = get_option('wlp_filter_http')) )   { $filter_http = (defined('WLP_FILTER_HTTP')?WLP_FILTER_HTTP:'on'); }
+  if( false==($protect_post = get_option('wlp_protect_post')) ) { $protect_post = (defined('WLP_PROTECT_POST')?WLP_PROTECT_POST:'on'); }
   
   // Adds an extra layer of basic auth to the wp-login page
   if( 'on'==$basic_auth ) { add_action('login_init','wlp_basic_auth'); }
@@ -69,9 +69,9 @@ function wlp_options() {
 }
 
 function wlp_display_options($message='') {
-  if( false==($basic_auth = get_option('wlp_basic_auth')) )     { $basic_auth = 'off'; }
-  if( false==($filter_http = get_option('wlp_filter_http')) )   { $filter_http = 'on'; }
-  if( false==($protect_post = get_option('wlp_protect_post')) ) { $protect_post = 'on'; }
+  if( false==($basic_auth = get_option('wlp_basic_auth')) )     { $basic_auth = (defined('WLP_BASIC_AUTH')?WLP_BASIC_AUTH:'off'); }
+  if( false==($filter_http = get_option('wlp_filter_http')) )   { $filter_http = (defined('WLP_FILTER_HTTP')?WLP_FILTER_HTTP:'on'); }
+  if( false==($protect_post = get_option('wlp_protect_post')) ) { $protect_post = (defined('WLP_PROTECT_POST')?WLP_PROTECT_POST:'on'); }
 
   ?>
   <h2><?php _e('Login Protector'); ?></h2>
@@ -103,7 +103,7 @@ function wlp_process_options() {
 
 // Basic auth on wp-login
 function wlp_basic_auth() {
-  if(!isset($_SERVER['PHP_AUTH_USER']))
+  if( !isset($_SERVER['PHP_AUTH_USER']) or !isset($_SERVER['PHP_AUTH_PW']) )
     wlp_unauthorized(__('No credentials have been provided.', 'memberpress'));
   else {
     $user = wp_authenticate($_SERVER['PHP_AUTH_USER'],$_SERVER['PHP_AUTH_PW']);
